@@ -10,6 +10,7 @@ class Functions:
             task = input('Informe a tarefa.\n(Digite [0] para retornar ao Menu)\n==> ')
             if task == '':
                 input('Campo vazio. Por favor, preencha corretamente. [Aperte Enter]')
+                fc.clear()
             elif task =='0':
                 return
             else:
@@ -42,7 +43,42 @@ class Functions:
         input('------------------------------------------\nPressione [Enter] para retornar ao menu.')
 
     def removeTask(self):
-        pass
+        while True:
+            fc.clear()
+            fc.createList()
+            chose = input('----------------------------------------------\nInforme o Nº correspondente a tarefa que deseja excluir.\n(Aperte [Enter] para voltar.)=> ')
+            if chose == '':
+                return
+            try:    
+                num = int(chose)
+            except ValueError:
+                input('\nEntrada inválida. Digite apenas números. [Aperte Enter]')
+                fc.clear()
+                continue
+            if 1 <= num <= len(lista):
+                task = lista[num-1]
+                ask = input(f'Tem certeza que deseja remover "{task}". (s/n)? ')
+                if ask == '':
+                    input('Entrada inválida. Responda [s] ou [n]. [Pressione Enter]...')
+                    fc.clear()
+                    continue
+                elif ask.lower() =='s':
+                    tarefa = lista.pop(num-1)
+                    input(f'////////////////////////////////////\nTarefa "{tarefa}" removida com sucesso.\n////////////////////////////////////\n[Pressione Enter]')
+                    fc.clear()
+                    continue
+                elif ask.lower() =='n':
+                    fc.clear()
+                    continue
+                else:
+                    input('Opção inválida. Digite [s] ou [n]. [Pressione Enter]')
+                    fc.clear()
+            else:
+                input('Nº fora da lista de tarefas. Insira um Nº válido. [Pressione Enter]')
+                fc.clear()
+                continue
+
+
 # chamando a classe:
 fc = Functions()
 while True:
