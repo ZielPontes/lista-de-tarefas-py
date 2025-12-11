@@ -29,7 +29,10 @@ class Functions:
                         return # return serve para encerrar o loop e a função retornando pra onde ela foi chamada.
                     else:
                         input('Campo inválido. [Aperte Enter]')
-    
+    def createPdf(self):
+        pass
+    def print(self):
+        pass
     def createList(self):
         print('------------ Lista de Tarefas ------------')
         if not lista:
@@ -38,10 +41,26 @@ class Functions:
             for i, task in enumerate(lista, start=1):
                 print(f'#{i} - {task}.')
     def listTask(self):
-        fc.clear()
-        fc.createList()
-        input('------------------------------------------\nPressione [Enter] para retornar ao menu.')
-
+        while True:
+            fc.clear()
+            fc.createList()
+            option = input('------------------------------------------\n[1]Gerar PDF.\n[2]Imprimir Lista.\nPressione [Enter] para retornar ao menu.\n==> ')
+            if option == '':
+                return
+            try:
+                num = int(option)
+            except ValueError:
+                input('Digite apenas números. [Pressione Enter]')
+                fc.clear()
+                continue
+            if num == 1:
+                fc.createPdf()
+            elif num == 2:
+                fc.print()
+            else:
+                input('Digite apenas opções válidas. [Pressione Enter]')
+                fc.clear()
+                continue
     def removeTask(self):
         while True:
             fc.clear()
